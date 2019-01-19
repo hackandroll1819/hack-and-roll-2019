@@ -16,7 +16,7 @@ public class HNRARController : MonoBehaviour
   /// <summary>
   /// A game object parenting UI for displaying the "searching for planes" snackbar.
   /// </summary>
-  public GameObject SearchingForPlaneUI;
+  //public GameObject SearchingForPlaneUI;
 
   /// <summary>
   /// A list to hold all planes ARCore is tracking in the current frame. This object is used across
@@ -27,12 +27,14 @@ public class HNRARController : MonoBehaviour
   /// <summary>
   /// The overlay containing the fit to scan user guide.
   /// </summary>
-  public GameObject FitToScanOverlay;
+  //public GameObject FitToScanOverlay;
 
   /// <summary>
   /// Stores all detecected Augmented Images
   /// </summary>
   private List<AugmentedImage> m_TempAugmentedImages = new List<AugmentedImage>();
+
+  public UIController UIController;
 
   private bool m_IsQuitting = false;
 
@@ -48,20 +50,21 @@ public class HNRARController : MonoBehaviour
   {
     if (m_AllPlanes.Count <= 0)
     {
-      SearchingForPlaneUI.SetActive(true);
+      UIController.ShowCalibratePrompt();
     }
     else
     {
       //_ShowAndroidToastMessage(m_TempAugmentedImages.Count.ToString());
       if (m_TempAugmentedImages.Count <= 0)
       {
-        FitToScanOverlay.SetActive(true);
+        UIController.ShowScanImagePrompt();
       }
-      else
+      // NOTE: This is for already scanned image
+      /*else
       {
-        FitToScanOverlay.SetActive(false);
-      }
-      SearchingForPlaneUI.SetActive(false);
+        UIController.SetActive(false);
+      }*/
+      // SearchingForPlaneUI.SetActive(false);
     }
 
     _UpdateApplicationLifecycle();
@@ -70,10 +73,10 @@ public class HNRARController : MonoBehaviour
 
     if (m_AllPlanes.Count <= 0)
     {
-      SearchingForPlaneUI.SetActive(true);
+      UIController.ShowCalibratePrompt();
       return;
     }
-    SearchingForPlaneUI.SetActive(false);
+    // UIController.SetActive(false);
 
     FindAugmentedImages();
 
@@ -91,13 +94,14 @@ public class HNRARController : MonoBehaviour
         ReinstantiateRoute(AI);
         break;
       }
-      else if (AI.DatabaseIndex != currTrackingIdx)
+      // TODO: Prompt: handle the different database index change
+      /*else if (AI.DatabaseIndex != currTrackingIdx)
       {
         // TODO: Prompt User for change
         //_ShowAndroidToastMessage("Prompt User");
         nextAI = AI;
         UserResponded = false;
-      }
+      }*/
     }
   }
 
@@ -115,9 +119,13 @@ public class HNRARController : MonoBehaviour
 
   private void ReinstantiateRoute(AugmentedImage AI)
   {
-    existingAnchor = m_AllPlanes[AI.DatabaseIndex].CreateAnchor(AI.CenterPose);
-    Instantiate(ToSpawnPrefabs[AI.DatabaseIndex], AI.CenterPose.position, AI.CenterPose.rotation, existingAnchor.transform);
-    currTrackingIdx = AI.DatabaseIndex;
+    _ShowAndroidToastMessage("Detected picture, showing route!");
+    if (AI.TrackingState == TrackingState.Tracking)
+    {
+      existingAnchor = m_AllPlanes[AI.DatabaseIndex].CreateAnchor(AI.CenterPose);
+      Instantiate(ToSpawnPrefabs[AI.DatabaseIndex], AI.CenterPose.position, AI.CenterPose.rotation, existingAnchor.transform);
+      currTrackingIdx = AI.DatabaseIndex;
+    }
   }
 
   private void FindAugmentedImages()
