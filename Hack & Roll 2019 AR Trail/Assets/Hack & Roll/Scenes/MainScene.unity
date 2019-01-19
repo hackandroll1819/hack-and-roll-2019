@@ -225,8 +225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstPersonCamera: {fileID: 20155940193251320}
-  ToSpawnPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
-    type: 3}
+  ToSpawnPrefabs:
+  - {fileID: 1190091649889860, guid: 63e9325810cb14b9e8e0590d57d87afb, type: 3}
+  - {fileID: 1190091649889860, guid: eb1313675690dc14fbfdfd7d96878fb0, type: 3}
   SearchingForPlaneUI: {fileID: 1133631540}
   FitToScanOverlay: {fileID: 648853219}
 --- !u!1 &648853219

@@ -10,7 +10,7 @@ public class HNRARController : MonoBehaviour
   /// The first-person camera being used to render the passthrough camera image (i.e. AR background).
   /// </summary>
   public Camera FirstPersonCamera;
-  
+
   public GameObject[] ToSpawnPrefabs;
 
   /// <summary>
@@ -36,11 +36,30 @@ public class HNRARController : MonoBehaviour
 
   private bool m_IsQuitting = false;
 
-  private GameObject AnchorHolder;
+  private Anchor existingAnchor;
 
-  private void Start()
+  private int currTrackingIdx = -1;
+
+  private bool UserResponded = true;
+
+  private AugmentedImage nextAI = null;
+
+  private void EarlyUpdate()
   {
-    AnchorHolder = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
+    if (m_AllPlanes.Count <= 0)
+    {
+      SearchingForPlaneUI.SetActive(true);
+    }
+    _ShowAndroidToastMessage(m_TempAugmentedImages.Count.ToString());
+    if (m_TempAugmentedImages.Count <= 0)
+    {
+      FitToScanOverlay.SetActive(true);
+    }
+    else
+    {
+      FitToScanOverlay.SetActive(false);
+    }
+    SearchingForPlaneUI.SetActive(false);
   }
 
   private void Update()
@@ -60,11 +79,44 @@ public class HNRARController : MonoBehaviour
 
     // TODO: Include a way to track which augmented image is active
 
+    if (!UserResponded)
+    {
+      return;
+    }
+
     foreach (AugmentedImage AI in m_TempAugmentedImages)
     {
-      var anchor = m_AllPlanes[AI.DatabaseIndex].CreateAnchor(AI.CenterPose);
-      Instantiate(ToSpawnPrefabs[AI.DatabaseIndex], AI.CenterPose.position, AI.CenterPose.rotation, anchor.transform);
+      if (currTrackingIdx < 0)
+      {
+        ReinstantiateRoute(AI);
+        break;
+      }
+      else if (AI.DatabaseIndex != currTrackingIdx)
+      {
+        // TODO: Prompt User for change
+        _ShowAndroidToastMessage("Prompt User");
+        nextAI = AI;
+        UserResponded = false;
+      }
     }
+  }
+
+  public void UserResponse(bool yo)
+  {
+    if (yo)
+    {
+      ReinstantiateRoute(nextAI);
+      nextAI = null;
+    }
+    // TODO: Close Pop up
+    UserResponded = true;
+  }
+
+  private void ReinstantiateRoute(AugmentedImage AI)
+  {
+    existingAnchor = m_AllPlanes[AI.DatabaseIndex].CreateAnchor(AI.CenterPose);
+    Instantiate(ToSpawnPrefabs[AI.DatabaseIndex], AI.CenterPose.position, AI.CenterPose.rotation, existingAnchor.transform);
+    currTrackingIdx = AI.DatabaseIndex;
   }
 
   private void FindAugmentedImages()
