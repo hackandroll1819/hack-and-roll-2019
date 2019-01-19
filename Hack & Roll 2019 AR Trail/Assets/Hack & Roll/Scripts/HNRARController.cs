@@ -52,7 +52,7 @@ public class HNRARController : MonoBehaviour
     }
     else
     {
-      _ShowAndroidToastMessage(m_TempAugmentedImages.Count.ToString());
+      //_ShowAndroidToastMessage(m_TempAugmentedImages.Count.ToString());
       if (m_TempAugmentedImages.Count <= 0)
       {
         FitToScanOverlay.SetActive(true);
@@ -94,7 +94,7 @@ public class HNRARController : MonoBehaviour
       else if (AI.DatabaseIndex != currTrackingIdx)
       {
         // TODO: Prompt User for change
-        _ShowAndroidToastMessage("Prompt User");
+        //_ShowAndroidToastMessage("Prompt User");
         nextAI = AI;
         UserResponded = false;
       }
