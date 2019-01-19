@@ -44,26 +44,26 @@ public class HNRARController : MonoBehaviour
 
   private AugmentedImage nextAI = null;
 
-  private void EarlyUpdate()
+  private void Update()
   {
     if (m_AllPlanes.Count <= 0)
     {
       SearchingForPlaneUI.SetActive(true);
     }
-    _ShowAndroidToastMessage(m_TempAugmentedImages.Count.ToString());
-    if (m_TempAugmentedImages.Count <= 0)
-    {
-      FitToScanOverlay.SetActive(true);
-    }
     else
     {
-      FitToScanOverlay.SetActive(false);
+      _ShowAndroidToastMessage(m_TempAugmentedImages.Count.ToString());
+      if (m_TempAugmentedImages.Count <= 0)
+      {
+        FitToScanOverlay.SetActive(true);
+      }
+      else
+      {
+        FitToScanOverlay.SetActive(false);
+      }
+      SearchingForPlaneUI.SetActive(false);
     }
-    SearchingForPlaneUI.SetActive(false);
-  }
 
-  private void Update()
-  {
     _UpdateApplicationLifecycle();
 
     TrackAllDetectedPlanes();
@@ -105,6 +105,7 @@ public class HNRARController : MonoBehaviour
   {
     if (yo)
     {
+      Destroy(existingAnchor.gameObject);
       ReinstantiateRoute(nextAI);
       nextAI = null;
     }

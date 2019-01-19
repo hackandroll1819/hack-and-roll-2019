@@ -226,8 +226,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstPersonCamera: {fileID: 20155940193251320}
   ToSpawnPrefabs:
-  - {fileID: 1190091649889860, guid: 63e9325810cb14b9e8e0590d57d87afb, type: 3}
-  - {fileID: 1190091649889860, guid: eb1313675690dc14fbfdfd7d96878fb0, type: 3}
+  - {fileID: 2200386355303010750, guid: 0569633be5f9a6f42aa9168d060ad0d0, type: 3}
+  - {fileID: 2200386355303010750, guid: 3053da7a62db107439cb26671aee6ab0, type: 3}
+  - {fileID: 2200386355303010750, guid: 255dada28c8e89a4384ba6dd63d4742c, type: 3}
   SearchingForPlaneUI: {fileID: 1133631540}
   FitToScanOverlay: {fileID: 648853219}
 --- !u!1 &648853219
@@ -266,7 +267,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1210.875, y: 0}
+  m_SizeDelta: {x: -843.6875, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &648853221
 MonoBehaviour:
