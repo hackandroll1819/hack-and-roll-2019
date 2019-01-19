@@ -11,7 +11,7 @@ public class HNRARController : MonoBehaviour
   /// </summary>
   public Camera FirstPersonCamera;
   
-  public GameObject ToSpawnPrefab;
+  public GameObject[] ToSpawnPrefabs;
 
   /// <summary>
   /// A game object parenting UI for displaying the "searching for planes" snackbar.
@@ -36,6 +36,13 @@ public class HNRARController : MonoBehaviour
 
   private bool m_IsQuitting = false;
 
+  private GameObject AnchorHolder;
+
+  private void Start()
+  {
+    AnchorHolder = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
+  }
+
   private void Update()
   {
     _UpdateApplicationLifecycle();
@@ -51,7 +58,13 @@ public class HNRARController : MonoBehaviour
 
     FindAugmentedImages();
 
-    // TODO: Find a plane, the image, spawn a prefab arrow to store 3d positions
+    // TODO: Include a way to track which augmented image is active
+
+    foreach (AugmentedImage AI in m_TempAugmentedImages)
+    {
+      var anchor = m_AllPlanes[AI.DatabaseIndex].CreateAnchor(AI.CenterPose);
+      Instantiate(ToSpawnPrefabs[AI.DatabaseIndex], AI.CenterPose.position, AI.CenterPose.rotation, anchor.transform);
+    }
   }
 
   private void FindAugmentedImages()
