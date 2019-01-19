@@ -11,6 +11,9 @@ public class UIController : MonoBehaviour
     private GameObject scanImagePrompt;
 
     [SerializeField]
+    private GameObject navigatingScreen;
+
+    [SerializeField]
     private GameObject destinationReachedPrompt;
 
     private int counter = 0;
@@ -66,6 +69,11 @@ public class UIController : MonoBehaviour
             destinationReachedPrompt.SetActive(false);
         }
 
+        if (navigatingScreen.activeInHierarchy == true)
+        {
+            navigatingScreen.SetActive(false);
+        }
+
         if (calibratePrompt.activeInHierarchy == true)
         {
             return;
@@ -86,6 +94,11 @@ public class UIController : MonoBehaviour
         if (calibratePrompt.activeInHierarchy == true)
         {
             calibratePrompt.SetActive(false);
+        }
+
+        if (navigatingScreen.activeInHierarchy == true)
+        {
+            navigatingScreen.SetActive(false);
         }
 
         if (scanImagePrompt.activeInHierarchy == true)
@@ -109,11 +122,41 @@ public class UIController : MonoBehaviour
             calibratePrompt.SetActive(false);
         }
 
+        if (navigatingScreen.activeInHierarchy == true)
+        {
+            navigatingScreen.SetActive(false);
+        }
+
         if (destinationReachedPrompt.activeInHierarchy == true)
         {
             return;
         }
 
         destinationReachedPrompt.SetActive(true);
+    }
+
+    public void ShowNavigatingScreen()
+    {
+        if (scanImagePrompt.activeInHierarchy == true)
+        {
+            scanImagePrompt.SetActive(false);
+        }
+
+        if (calibratePrompt.activeInHierarchy == true)
+        {
+            calibratePrompt.SetActive(false);
+        }
+
+        if (destinationReachedPrompt.activeInHierarchy == true)
+        {
+            destinationReachedPrompt.SetActive(false);
+        }
+
+        if (navigatingScreen.activeInHierarchy == true)
+        {
+            return;
+        }
+
+        navigatingScreen.SetActive(true);
     }
 }
