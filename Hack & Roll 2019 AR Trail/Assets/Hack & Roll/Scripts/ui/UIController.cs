@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.touches != null)
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
@@ -50,6 +51,7 @@ public class UIController : MonoBehaviour
             default:
                 break;
         }
+        */
     }
 
     public void ShowCalibratePrompt()
