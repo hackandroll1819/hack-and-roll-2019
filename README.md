@@ -1,10 +1,10 @@
-# AR Navigation (Team Name: HD)
+# nARvigation (Team Name: HD)
 
 ## Target Audience: People going for events in a new or unfamiliar environment
 
 Team Members: [Brandon Yeo](https://github.com/brandonyeoxg), [Deborah Low](https://github.com/deborahlow97), [Ryan Tan](https://github.com/RyanTanWJ), [Victor Loh](https://github.com/lohvht) <br>
 
-AR Navigation provides an Augmented Reality for Android users to aid them in navigating their way to a location clearly.
+NARvigation provides an Augmented Reality for Android users to aid them in navigating their way to a location clearly.
 
 ## Setting Up
 1. Requires an Android phone to use the application.
@@ -21,8 +21,8 @@ AR Navigation provides an Augmented Reality for Android users to aid them in nav
 
 ## User Stories
 * As a user, I want to be able to navigate to my destination.
-* * As a user, I want to indicate my current location and destination to the application so that the application can direct my to my destination correctly.
-* * As a user, I want to know which direction I have to walk towards to.
+    * As a user, I want to indicate my current location and destination to the application so that the application can direct my to my destination correctly.
+    * As a user, I want to know which direction I have to walk towards to.
 
 ## Features
 * Augmented Reality setting
