@@ -10,7 +10,7 @@ public class ArrowInteractable : MonoBehaviour
   {
     ParticleSystem.gameObject.SetActive(false);
   }
-
+  
   private void OnMouseUp()
   {
     if (!ParticleSystem.gameObject.activeSelf)

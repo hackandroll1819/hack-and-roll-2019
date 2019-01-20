@@ -468,7 +468,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1884399510}
-  - component: {fileID: 1427179196}
   - component: {fileID: 737358334051264310}
   - component: {fileID: 7941312424498937019}
   m_Layer: 0
@@ -499,25 +498,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1427179196
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427179195}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1f3ba7dc1c7376d48b60c8dbafa9eab2, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &737358334051264310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParticleSystem: {fileID: 4395304364946445998}
+  animator: {fileID: 0}
 --- !u!65 &7941312424498937019
 BoxCollider:
   m_ObjectHideFlags: 0
