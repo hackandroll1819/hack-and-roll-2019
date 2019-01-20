@@ -59,6 +59,7 @@ public class HNRARController : MonoBehaviour
             //_ShowAndroidToastMessage(m_TempAugmentedImages.Count.ToString());
             if (m_TempAugmentedImages.Count <= 0)
             {
+                _ShowAndroidToastMessage("Floor scan complete! Please scan the image marker!");
                 UIController.ShowScanImagePrompt();
             }
             // NOTE: This is for already scanned image
